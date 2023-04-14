@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cute+Font&display=swap');
 
 body {
-    background-color: #4acf7d;
+    background-image: linear-gradient(to right, rgb(3, 105, 3),rgb(47, 228, 47));
     color: white;
     height: 95vh;
     width: 95vw;
@@ -16,7 +16,7 @@ body {
 }
 
 #snake {
-    border: solid 10px white;
+    border: solid 2px white;
 }
 
 .container {
@@ -34,9 +34,7 @@ img {
     right: 72%;
 }
 
-
-/* Corrigir as gambiarras de posicionamento */
-.ptn-Pontos {
+.btn {
   background-image: url(../image/pontuacao.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -47,7 +45,7 @@ img {
   margin-top: 42%;
 }
 
-#pontuacao {
+#score {
     position: relative;
     left: 83%;
     margin-top: 11%;
