@@ -1,42 +1,41 @@
-/*       MySnakeGame
-*/
-let canvas = document.getElementById("snake"); // Chamando a Snake mencionada no HTML
-let point = document.getElementById("pontuacao"); // Chamando a pontuacao mencionada no HTML
-let context = canvas.getContext("2d"); // Renderizando o desenho - Plano 2D
-let audio = document.getElementById("myAudio"); // Musica do Jogo
+
+let canvas = document.getElementById("snake"); 
+let point = document.getElementById("score");
+let context = canvas.getContext("2d");
+let audio = document.getElementById("myAudio"); 
 audio.volume = 0.1; 
-let box = 32; //32 Pixels por quadrado no Canvas
-let total = 0;  //Pontuacao Total iniciada em 0
+let box = 32; 
+let total = 0;  
 let snake = [];
 snake[0] = {
     x:  8 * box,
     y:  8 * box
 }
-let direction = "right"; // A cobra sempre começa andando para a direita
+let direction = "right"; 
 
-let food ={ //Gera posições aleatorias para o nascimento do bloco de "Comida"
+let food ={ 
     x: Math.floor(Math.random() * 15 + 1) * box,
     y: Math.floor(Math.random() * 15 + 1) * box
 }
 
-function criarBG(){ // Desenha o Canvas e Define o seu estilo em 4 parametros: x, y, altura e largura
+function backgroundcreation(){
     context.fillStyle = "#201F1F"; 
     context.fillRect(0, 0, 16 * box, 16 * box);
 }
 
-function criarCobrinha (){ //Desenhando o bloco da cobra, sua cor e seu tamanhho (coordenadas)
+function snakecreation (){ 
     for(i = 0; i < snake.length; i++){
         context.fillStyle = "#FFFFFF";
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
 }
 
-function drawFood(){ //Desenhando o bloco de comida, sua cor e seu tamanhho (coordenadas)
+function drawFood(){ 
     context.fillStyle = "#FFFFFF";
     context.fillRect(food.x, food.y, box, box);
 }
 
-document.addEventListener('keydown', update); //Quando um evento acontece, detecta e chama essa função
+document.addEventListener('keydown', update); 
 function update(event){
     if(event.keyCode == 37 && direction != 'right') direction = 'left';
     if(event.keyCode == 38 && direction != 'down') direction = 'up';
@@ -45,7 +44,7 @@ function update(event){
 }
 
 
-function iniciarJogo(){ //Ao iniciar o jogo é realizado essas checagens de ações
+function startgame(){ 
     if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
     if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
     if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
@@ -56,27 +55,27 @@ function iniciarJogo(){ //Ao iniciar o jogo é realizado essas checagens de aç�
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
             clearInterval(jogo);
             alert("Game over! Your Score is: " + total)
-            window.location.reload() //Ao clicar em Ok, o jogo reinicia
+            window.location.reload() 
         }
     }
 
-    criarBG();
-    criarCobrinha();
+    backgroundcreation();
+    snakecreation();
     drawFood();
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
-    if(direction == "right") snakeX += box; // Calculo feito com base no Plano Cartesiano
+    if(direction == "right") snakeX += box; 
     if(direction == "left") snakeX -= box;
     if(direction == "up") snakeY -= box;
     if(direction == "down") snakeY += box;
 
 
     if(snakeX != food.x || snakeY != food.y) {
-            snake.pop(); //pop tira o último elemento da lista
+            snake.pop(); 
     }
-    else{ //recebendo posições aleatorias
+    else{ 
         food.x = Math.floor(Math.random() * 15 + 1) * box;
         food.y = Math.floor(Math.random() * 15 + 1) * box;
 
@@ -89,7 +88,7 @@ function iniciarJogo(){ //Ao iniciar o jogo é realizado essas checagens de aç�
         y: snakeY
     }
 
-    snake.unshift(newHead); //Adiciona mais blocos a cobrinha
+    snake.unshift(newHead); 
 }
 
-let jogo = setInterval(iniciarJogo, 100); // Intervalo para iniciar o jogo 
+let jogo = setInterval(startgame, 100); 
